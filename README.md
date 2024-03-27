@@ -9,4 +9,4 @@ The game is built using Google Apps Script and deployed as a WebApp.  In order t
 
 The Kaboom code is all written within the js.html file.  Sprites for the game are located in the Game_Sprites folder.
 
-Link to playable version of the game: [Kaboom Intro Game v3](https://script.google.com/a/macros/eagleschools.net/s/AKfycbyC7Mnfe8z0Pq0OTObUyayaphD1Ouq5yhSY2DXxeETBZFS2Gg6Ij5IOjXaoeV76FhdkHA/exec)
+Link to playable version of the game:  <a href="https://script.google.com/a/macros/eagleschools.net/s/AKfycbyC7Mnfe8z0Pq0OTObUyayaphD1Ouq5yhSY2DXxeETBZFS2Gg6Ij5IOjXaoeV76FhdkHA/exec" target="_blank">Kaboom Intro Game v3</a>
