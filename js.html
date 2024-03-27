@@ -1,0 +1,94 @@
+<script type="module">
+
+  // import kaboom lib
+  import kaboom from "https://unpkg.com/kaboom@3000.0.1/dist/kaboom.mjs";
+
+  // initialize kaboom context
+  kaboom({
+    width: 869,
+    height: 669,
+    scale: 1,
+    font: "sans-serif",
+    background: [52, 232, 235]
+  });
+
+  loadSprite("buddy", "https://raw.githubusercontent.com/sahopkin/sprites/main/player.png");
+  loadSprite("ground", "https://raw.githubusercontent.com/sahopkin/sprites/main/ground_2.png");
+  loadSprite("enemy", "https://raw.githubusercontent.com/sahopkin/sprites/main/enemy.png");
+
+  scene("game", () => {
+
+    const MOVE_SPEED = 200
+
+    addLevel([
+      '                          ',  //Defines the play space
+      '                    @     ',
+      '                          ',
+      '                          ',
+      '     @                    ',
+      '                          ',
+      '             @            ',
+      '                          ',
+      ' xxxxxxxxxxx   xxxxxxxxxx '
+    ], {
+      tileWidth: 32, //defines width of each space for @/x
+      tileHeight: 32,//defines height of each space for @/x
+      tiles: {
+        "x": () => [sprite("ground"), area(), body({ isStatic: true })],
+        "@": () => [sprite("enemy"), area(), "dangerous"]
+      }
+    })
+
+    setGravity(500);
+
+    const player = add([
+      sprite("buddy"),  // renders as a sprite
+      pos(32, 10),      // position in world
+      area(),           // has a collider
+      body(),           // responds to physics and gravity
+      offscreen({ destroy: true })
+    ]);
+    
+
+    onKeyDown('right', () => {
+      player.move(MOVE_SPEED, 0)
+    })
+
+    onKeyDown('left', () => {
+      player.move(-MOVE_SPEED, 0)
+    })
+
+    onKeyDown('space', () => {
+      player.move(0, -300)
+    })                       
+
+    player.onCollide('dangerous', () => {
+      destroy(player)
+      go("lose")
+    })
+
+    player.onUpdate(() => {
+      if ( player.pos.y > height() ) {
+        go("lose")
+      }
+    })
+
+  });
+
+  scene("lose", () => {
+    add([
+      text("Game Over"),
+      anchor("center"),
+      scale(3),
+      pos(width() / 2, height() / 2)
+    ])
+
+    onKeyPress('space', () => {
+      go("game")
+    })
+  });
+
+  go("game")
+
+
+</script>
