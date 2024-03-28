@@ -51,10 +51,12 @@
     
 
     onKeyDown('right', () => {
+      player.flipX = false
       player.move(MOVE_SPEED, 0)
     })
 
     onKeyDown('left', () => {
+      player.flipX = true
       player.move(-MOVE_SPEED, 0)
     })
 
